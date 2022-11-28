@@ -9,8 +9,8 @@ import android.widget.TextView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_name = "name"
-private const val ARG_pv = "pv"
+private const val ARG_NAME = "name"
+private const val ARG_PV = "pv"
 
 /**
  * A simple [Fragment] subclass.
@@ -25,8 +25,8 @@ class PokemonFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            name = it.getString(ARG_name)
-            pv = it.getString(ARG_pv)
+            name = it.getString(ARG_NAME)
+            pv = it.getString(ARG_PV)
         }
     }
 
@@ -59,8 +59,8 @@ class PokemonFragment : Fragment() {
         @JvmStatic fun newInstance(name: String, pv: String) =
                 PokemonFragment().apply {
                     arguments = Bundle().apply {
-                        putString(ARG_name, name)
-                        putString(ARG_pv, pv)
+                        putString(ARG_NAME, name)
+                        putString(ARG_PV, pv)
                     }
                 }
     }

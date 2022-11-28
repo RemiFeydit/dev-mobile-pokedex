@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/pokemon_page"
+        android:title="Pokemons"
+        android:icon="@drawable/pokeball" />
+
+    <item
+        android:id="@+id/talent_page"
+        android:title="Talents"
+        android:icon="@drawable/abilitycapsule" />
+
+    <item
+        android:id="@+id/attack_page"
+        android:title="Attacks"
+        android:icon="@drawable/ct" />
+
+</menu>
