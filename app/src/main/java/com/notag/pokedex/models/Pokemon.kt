@@ -5,18 +5,27 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Pokemon(
-    val pokedexId: Int,
+    val order: Int,
     val name: String,
-    val hp: Int,
-    val atk: Int,
-    val def: Int,
-    val speAtk: Int,
-    val speDef: Int,
-    val speed: Int,
-    val types: List<String>,
-    val moves: List<Moves>,
-    val abilities: List<Abilities>,
-    val weight: Float,
-    val height: Float,
-    val sprite: String,
-) : Parcelable
+    val stats : Array<Stat>
+) : Parcelable {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Pokemon
+
+        if (order != other.order) return false
+        if (name != other.name) return false
+        if (!stats.contentEquals(other.stats)) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = order
+        result = 31 * result + name.hashCode()
+        result = 31 * result + stats.contentHashCode()
+        return result
+    }
+}

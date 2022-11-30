@@ -1,11 +1,19 @@
 package com.notag.pokedex
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import com.google.gson.Gson
+import com.notag.pokedex.models.Pokemon
+import com.notag.pokedex.models.Stat
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,12 +46,42 @@ class PokemonFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val textViewPokemonNumber = view.findViewById(R.id.textViewPokemonNumber) as TextView
         val textViewPokemonName = view.findViewById(R.id.textViewPokemonName) as TextView
-        val textViewPokemonPV = view.findViewById(R.id.textViewPokemonPV) as TextView
+        val textViewPokemonHp = view.findViewById(R.id.textViewPokemonHp) as TextView
+        val textViewPokemonAtk = view.findViewById(R.id.textViewPokemonAtk) as TextView
+        val textViewPokemonDef = view.findViewById(R.id.textViewPokemonDef) as TextView
+        val textViewPokemonSpeAtk = view.findViewById(R.id.textViewPokemonSpeAtk) as TextView
+        val textViewPokemonSpeDef = view.findViewById(R.id.textViewPokemonSpeDef) as TextView
+        val textViewPokemonSpeed = view.findViewById(R.id.textViewPokemonSpeed) as TextView
 
-        textViewPokemonName.text = name
-        textViewPokemonPV.text = pv
+        val queue = Volley.newRequestQueue(context)
+        val url = "https://pokeapi.co/api/v2/pokemon/1"
+        val stringRequest = StringRequest(
+            Request.Method.GET, url,
+            {response ->
+                Log.i("JSON", response)
+                val pokemon = Gson().fromJson(response, Pokemon::class.java)
+                val stat = Gson().toJson(pokemon.stats)
+                val newStat = Gson().fromJson(stat, Array<Stat>::class.java).toList()
+                textViewPokemonNumber.text = "N° : ${pokemon.order.toString()}"
+                textViewPokemonName.text = "Name : ${pokemon.name.substring(0, 1).uppercase() + pokemon.name.substring(1).lowercase()}"
+                textViewPokemonHp.text = "HP : ${newStat[0].base_stat}"
+                textViewPokemonAtk.text = "Atk : ${newStat[1].base_stat}"
+                textViewPokemonDef.text = "Def : ${newStat[2].base_stat}"
+                textViewPokemonSpeAtk.text = "Spe Atk : ${newStat[3].base_stat}"
+                textViewPokemonSpeDef.text = "Spe Def : ${newStat[4].base_stat}"
+                textViewPokemonSpeed.text = "Speed : ${newStat[5].base_stat}"
+
+
+
+
+            },
+            {
+
+            }
+        )
+        queue.add(stringRequest)
     }
 
     companion object {
