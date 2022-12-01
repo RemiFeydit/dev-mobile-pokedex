@@ -1,24 +1,16 @@
 package com.notag.pokedex
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
-import com.google.gson.Gson
+import android.widget.ListView
 import com.notag.pokedex.models.Pokemon
-import com.notag.pokedex.models.Stat
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_NAME = "name"
-private const val ARG_PV = "pv"
+private const val ARG_POKEMONS = "name"
 
 /**
  * A simple [Fragment] subclass.
@@ -27,14 +19,12 @@ private const val ARG_PV = "pv"
  */
 class PokemonFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var name: String? = null
-    private var pv: String? = null
+    private var pokemons: ArrayList<Pokemon>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            name = it.getString(ARG_NAME)
-            pv = it.getString(ARG_PV)
+            pokemons = it.getParcelableArrayList(ARG_POKEMONS)
         }
     }
 
@@ -46,7 +36,17 @@ class PokemonFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val textViewPokemonNumber = view.findViewById(R.id.textViewPokemonNumber) as TextView
+
+
+        val listViewPokemons = view.findViewById(R.id.ListViewPokemons) as ListView
+
+        listViewPokemons.adapter = PokemonAdapter(
+            requireContext(),
+            R.layout.item_pokemon,
+            pokemons!!
+        )
+
+        /* val textViewPokemonNumber = view.findViewById(R.id.textViewPokemonNumber) as TextView
         val textViewPokemonName = view.findViewById(R.id.textViewPokemonName) as TextView
         val textViewPokemonHp = view.findViewById(R.id.textViewPokemonHp) as TextView
         val textViewPokemonAtk = view.findViewById(R.id.textViewPokemonAtk) as TextView
@@ -82,6 +82,8 @@ class PokemonFragment : Fragment() {
             }
         )
         queue.add(stringRequest)
+
+         */
     }
 
     companion object {
@@ -94,11 +96,10 @@ class PokemonFragment : Fragment() {
          * @return A new instance of fragment PokemonFragment.
          */
         // TODO: Rename and change types and number of parameters
-        @JvmStatic fun newInstance(name: String, pv: String) =
+        @JvmStatic fun newInstance(pokemons: ArrayList<Pokemon>) =
                 PokemonFragment().apply {
                     arguments = Bundle().apply {
-                        putString(ARG_NAME, name)
-                        putString(ARG_PV, pv)
+                        putParcelableArrayList(ARG_POKEMONS, pokemons)
                     }
                 }
     }
