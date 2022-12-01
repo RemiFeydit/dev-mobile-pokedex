@@ -34,6 +34,7 @@ class PokemonAdapter(context: Context, private val resource: Int, objects: Array
             .into(myViewHolder.itemPokemonImage)
 
          */
+
         myViewHolder.itemPokemonName?.setText(item!!.name)
 
 

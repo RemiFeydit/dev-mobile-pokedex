@@ -1,5 +1,6 @@
 package com.notag.pokedex
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -48,6 +49,20 @@ class AttackFragment : Fragment() {
             R.layout.item_moves,
             moves!!
         )
+
+        listViewMoves.setOnItemClickListener { parent, view, position, id ->
+            var item = moves!!.get(position)
+
+            println(item)
+
+            val intentMove = Intent(context, DetailMovesActivity::class.java)
+
+            intentMove.putExtra("move", item)
+
+            startActivity(intentMove)
+
+
+        }
 
     }
 

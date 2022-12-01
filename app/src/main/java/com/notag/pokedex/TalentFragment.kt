@@ -1,5 +1,6 @@
 package com.notag.pokedex
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,7 +12,7 @@ import com.notag.pokedex.models.Abilities
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_NAME = "param1"
+private const val ARG_ABILITY = "param1"
 private const val ARG_CONTENT = "param2"
 
 /**
@@ -26,7 +27,7 @@ class TalentFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            abilities = it.getParcelableArrayList(ARG_NAME)
+            abilities = it.getParcelableArrayList(ARG_ABILITY)
         }
     }
 
@@ -41,13 +42,27 @@ class TalentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val listViewMoves = view.findViewById(R.id.ListViewAbilities) as ListView
+        val listViewAbilities = view.findViewById(R.id.ListViewAbilities) as ListView
 
-        listViewMoves.adapter = AbilityAdapter(
+        listViewAbilities.adapter = AbilityAdapter(
             requireContext(),
             R.layout.item_abilities,
             abilities!!
         )
+
+        listViewAbilities.setOnItemClickListener { parent, view, position, id ->
+            var item = abilities!!.get(position)
+
+            println(item)
+
+            val intentAbility = Intent(context, DetailAbilitiesActivity::class.java)
+
+            intentAbility.putExtra("ability", item)
+
+            startActivity(intentAbility)
+
+
+        }
     }
 
     companion object {
@@ -64,7 +79,7 @@ class TalentFragment : Fragment() {
         fun newInstance(abilities: ArrayList<Abilities>) =
             TalentFragment().apply {
                 arguments = Bundle().apply {
-                    putParcelableArrayList(ARG_NAME, abilities)
+                    putParcelableArrayList(ARG_ABILITY, abilities)
                 }
             }
     }

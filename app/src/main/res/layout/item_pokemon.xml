@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
+
+
     <TextView
         android:id="@+id/itemPokemonName"
         android:layout_width="match_parent"

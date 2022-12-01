@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class Moves(
     val name: String,
     val power: Int?,
-    val flavor_text_entries: List<FlavorTextEntry>,
+    var flavor_text_entries: List<FlavorTextEntry>,
     val type: Type,
     val accuracy: Int?,
     val pp: Int,
