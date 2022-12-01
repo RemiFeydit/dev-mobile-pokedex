@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListView
 import android.widget.TextView
+import com.notag.pokedex.models.Abilities
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -19,14 +21,12 @@ private const val ARG_CONTENT = "param2"
  */
 class TalentFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var name: String? = null
-    private var content: String? = null
+    private var abilities: ArrayList<Abilities>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            name = it.getString(ARG_NAME)
-            content = it.getString(ARG_CONTENT)
+            abilities = it.getParcelableArrayList(ARG_NAME)
         }
     }
 
@@ -41,11 +41,13 @@ class TalentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val textViewTalentName = view.findViewById(R.id.textViewTalentName) as TextView
-        val textViewTalentContent = view.findViewById(R.id.textViewTalentContent) as TextView
+        val listViewMoves = view.findViewById(R.id.ListViewAbilities) as ListView
 
-        textViewTalentName.text = name
-        textViewTalentContent.text = content
+        listViewMoves.adapter = AbilityAdapter(
+            requireContext(),
+            R.layout.item_abilities,
+            abilities!!
+        )
     }
 
     companion object {
@@ -59,11 +61,10 @@ class TalentFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(name: String, content: String) =
+        fun newInstance(abilities: ArrayList<Abilities>) =
             TalentFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_NAME, name)
-                    putString(ARG_CONTENT, content)
+                    putParcelableArrayList(ARG_NAME, abilities)
                 }
             }
     }

@@ -10,6 +10,8 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
+import com.notag.pokedex.models.Abilities
+import com.notag.pokedex.models.Moves
 import com.notag.pokedex.models.Pokemon
 import kotlinx.coroutines.delay
 import java.util.*
@@ -23,6 +25,8 @@ class HomeActivity : AppCompatActivity(), MyInterface {
     val myInterface = this
     private val bottomNavigationView: BottomNavigationView by lazy { findViewById(R.id.bottomNavigationView) }
     private var listPokemon = arrayListOf<Pokemon>()
+    private var listAbility = arrayListOf<Abilities>()
+    private var listMove = arrayListOf<Moves>()
 
     override fun onCallback(response: Boolean) {
 
@@ -36,7 +40,7 @@ class HomeActivity : AppCompatActivity(), MyInterface {
 
         val queue = Volley.newRequestQueue(this@HomeActivity)
 
-        for (i in 1..151) {
+        for (i in 1..154) {
             val url = String.format("https://pokeapi.co/api/v2/pokemon/%d", i)
 
             val stringRequest = JsonObjectRequest(
@@ -46,6 +50,12 @@ class HomeActivity : AppCompatActivity(), MyInterface {
                     // Log.i("JSON", response)
                     var pokemon = Gson().fromJson(response.toString(), Pokemon::class.java)
                     listPokemon.add(pokemon)
+
+                    listPokemon = listPokemon.sortedWith(compareBy<Pokemon> { it.order }).toCollection(ArrayList())
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.container, PokemonFragment.newInstance(listPokemon))
+                        .commit()
                 },
                 {
 
@@ -54,11 +64,44 @@ class HomeActivity : AppCompatActivity(), MyInterface {
             queue.add(stringRequest)
         }
 
-        Timer(false).schedule(4000) {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.container, PokemonFragment.newInstance(listPokemon))
-                .commit()
+        for (i in 1..268) {
+
+            var url = String.format("https://pokeapi.co/api/v2/ability/%d", i)
+
+            val stringRequest = JsonObjectRequest(
+                Request.Method.GET, url, null,
+                { response ->
+                    myInterface.onCallback(true)
+                    // Log.i("JSON", response)
+                    var abilities = Gson().fromJson(response.toString(), Abilities::class.java)
+                    println(abilities)
+                    listAbility.add(abilities)
+                },
+                {
+
+                }
+            )
+            queue.add(stringRequest)
+        }
+
+        for (i in 1..826) {
+
+            var url = String.format("https://pokeapi.co/api/v2/move/%d", i)
+
+            val stringRequest = JsonObjectRequest(
+                Request.Method.GET, url, null,
+                { response ->
+                    myInterface.onCallback(true)
+                    // Log.i("JSON", response)
+                    var moves = Gson().fromJson(response.toString(), Moves::class.java)
+                    println(moves)
+                    listMove.add(moves)
+                },
+                {
+
+                }
+            )
+            queue.add(stringRequest)
         }
 
 
@@ -85,6 +128,7 @@ class HomeActivity : AppCompatActivity(), MyInterface {
     }
 
     private fun loadFragmentPokemon() {
+        listPokemon = listPokemon.sortedWith(compareBy<Pokemon> { it.order }).toCollection(ArrayList())
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.container, PokemonFragment.newInstance(listPokemon))
@@ -94,14 +138,14 @@ class HomeActivity : AppCompatActivity(), MyInterface {
     private fun loadFragmentTalent() {
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container, TalentFragment.newInstance("Coloforce", "Double l'attaque physique"))
+            .replace(R.id.container, TalentFragment.newInstance(listAbility))
             .commit()
     }
 
     private fun loadFragmentAttack() {
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container, AttackFragment.newInstance("Tonnerre", "90"))
+            .replace(R.id.container, AttackFragment.newInstance(listMove))
             .commit()
     }
 

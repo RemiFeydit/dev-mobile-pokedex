@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListView
 import android.widget.TextView
+import com.notag.pokedex.models.Abilities
+import com.notag.pokedex.models.Moves
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_NAME = "param1"
-private const val ARG_POWER = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -19,14 +21,12 @@ private const val ARG_POWER = "param2"
  */
 class AttackFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var name: String? = null
-    private var power: String? = null
+    private var moves: ArrayList<Moves>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            name = it.getString(ARG_NAME)
-            power = it.getString(ARG_POWER)
+            moves = it.getParcelableArrayList(ARG_NAME)
         }
     }
 
@@ -41,11 +41,14 @@ class AttackFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val textViewAttackName = view.findViewById(R.id.textViewAttackName) as TextView
-        val textViewAttackPower = view.findViewById(R.id.textViewAttackPower) as TextView
+        val listViewMoves = view.findViewById(R.id.ListViewMoves) as ListView
 
-        textViewAttackName.text = name
-        textViewAttackPower.text = power
+        listViewMoves.adapter = MoveAdapter(
+            requireContext(),
+            R.layout.item_moves,
+            moves!!
+        )
+
     }
 
     companion object {
@@ -59,11 +62,10 @@ class AttackFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(name: String, power: String) =
+        fun newInstance(moves: ArrayList<Moves>) =
             AttackFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_NAME, name)
-                    putString(ARG_POWER, power)
+                    putParcelableArrayList(ARG_NAME, moves)
                 }
             }
     }

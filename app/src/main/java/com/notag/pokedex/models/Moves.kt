@@ -7,9 +7,42 @@ import kotlinx.parcelize.Parcelize
 data class Moves(
     val name: String,
     val power: Int?,
-    val content: String,
-    val type: String,
+    val flavor_text_entries: List<FlavorTextEntry>,
+    val type: Type,
     val accuracy: Int?,
     val pp: Int,
-    val attributes: String,
-) : Parcelable
+    val damage_class: DamageClass,
+) : Parcelable {
+    @Parcelize
+    data class FlavorTextEntry(
+        val flavor_text: String,
+        val language: Language,
+        val version_group: VersionGroup,
+    ) : Parcelable {
+        @Parcelize
+        data class Language(
+            val name: String,
+            val url: String,
+        ) : Parcelable
+
+        @Parcelize
+        data class VersionGroup(
+            val name: String,
+            val url: String,
+        ) : Parcelable
+
+    }
+
+    @Parcelize
+    data class Type(
+        val name: String,
+        val url: String,
+    ) : Parcelable
+
+    @Parcelize
+    data class DamageClass(
+        val name: String,
+        val url: String,
+    ) : Parcelable
+
+}
