@@ -1,6 +1,7 @@
 package com.notag.pokedex
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +27,7 @@ class DetailPokemonActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail_pokemon)
 
         val pokemon = intent.getParcelableExtra<Pokemon>("pokemon")
+        var isShiny: Boolean = false
 
         println(pokemon)
 
@@ -39,6 +41,22 @@ class DetailPokemonActivity : AppCompatActivity() {
         textViewPokemonSpeAtk.text = "Spe Atk : ${newStat[3].base_stat}"
         textViewPokemonSpeDef.text = "Spe Def : ${newStat[4].base_stat}"
         textViewPokemonSpeed.text = "Speed : ${newStat[5].base_stat}"
+        imageViewPokemonImage.setOnClickListener {
+            if (!isShiny) {
+                isShiny = true
+                Picasso
+                    .get()
+                    .load(pokemon?.sprites?.other?.home?.front_shiny)
+                    .into(imageViewPokemonImage);
+            } else {
+                isShiny = false
+                Picasso
+                    .get()
+                    .load(pokemon?.sprites?.other?.home?.front_default)
+                    .into(imageViewPokemonImage);
+            }
+
+        }
 
         Picasso
             .get()

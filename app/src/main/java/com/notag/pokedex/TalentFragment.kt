@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ListView
 import android.widget.TextView
+import androidx.core.widget.doAfterTextChanged
 import com.notag.pokedex.models.Abilities
 
 // TODO: Rename parameter arguments, choose names that match
@@ -43,6 +45,7 @@ class TalentFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val listViewAbilities = view.findViewById(R.id.ListViewAbilities) as ListView
+        val editTextRechercheAbilities = view.findViewById(R.id.EditTextRechercheAbilities) as EditText
 
         listViewAbilities.adapter = AbilityAdapter(
             requireContext(),
@@ -60,8 +63,17 @@ class TalentFragment : Fragment() {
             intentAbility.putExtra("ability", item)
 
             startActivity(intentAbility)
+        }
 
-
+        editTextRechercheAbilities.doAfterTextChanged {
+            var printListAbility = abilities?.filter {
+                    ability -> ability.name.lowercase().contains(editTextRechercheAbilities.text.toString().lowercase())
+            }?.toCollection(ArrayList())
+            listViewAbilities.adapter = AbilityAdapter(
+                requireContext(),
+                R.layout.item_abilities,
+                printListAbility!!
+            )
         }
     }
 

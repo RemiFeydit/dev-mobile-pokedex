@@ -25,7 +25,7 @@ data class Pokemon(
     @Parcelize
     data class Sprites(
         val other: Other,
-        val front_default: String
+        val front_default: String,
     ) : Parcelable {
         @Parcelize
         data class Other(
@@ -33,7 +33,8 @@ data class Pokemon(
         ) : Parcelable {
             @Parcelize
             data class Home(
-                val front_default: String
+                val front_default: String,
+                val front_shiny: String
             ) : Parcelable
         }
     }

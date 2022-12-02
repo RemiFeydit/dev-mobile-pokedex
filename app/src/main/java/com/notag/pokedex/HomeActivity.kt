@@ -4,7 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
@@ -28,6 +31,7 @@ class HomeActivity : AppCompatActivity(), MyInterface {
     private var listPokemon = arrayListOf<Pokemon>()
     private var listAbility = arrayListOf<Abilities>()
     private var listMove = arrayListOf<Moves>()
+    //private val EditTextRecherche: EditText by lazy { findViewById<EditText>(R.id.EditTextRecherche) }
 
     override fun onCallback(response: Boolean) {
 
@@ -41,7 +45,7 @@ class HomeActivity : AppCompatActivity(), MyInterface {
 
         val queue = Volley.newRequestQueue(this@HomeActivity)
 
-        for (i in 1..154) {
+        for (i in 1..151) {
             val url = String.format("https://pokeapi.co/api/v2/pokemon/%d", i)
 
             val stringRequest = JsonObjectRequest(
@@ -131,6 +135,20 @@ class HomeActivity : AppCompatActivity(), MyInterface {
                 else -> false
             }
         }
+
+        /* EditTextRecherche.doAfterTextChanged {
+            listPokemon = listPokemon.sortedWith(compareBy<Pokemon> { it.order }).toCollection(ArrayList())
+            var printListPokemon = listPokemon.filter {
+                pokemon -> pokemon.name.contains(EditTextRecherche.text)
+            }.toCollection(ArrayList())
+
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.container, PokemonFragment.newInstance(printListPokemon))
+                .commit()
+        }
+
+         */
 
 
 

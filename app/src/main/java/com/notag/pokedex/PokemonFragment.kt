@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ListView
 import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.load.engine.executor.GlideExecutor.UncaughtThrowableStrategy.LOG
@@ -42,6 +44,8 @@ class PokemonFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val listViewPokemons = view.findViewById(R.id.ListViewPokemons) as ListView
+        val editTextRecherchePokemon = view.findViewById(R.id.EditTextRecherchePokemon) as EditText
+
         listViewPokemons.adapter = PokemonAdapter(
             requireContext(),
             R.layout.item_pokemon,
@@ -52,6 +56,17 @@ class PokemonFragment : Fragment() {
             val intentPokemon = Intent(context, DetailPokemonActivity::class.java)
             intentPokemon.putExtra("pokemon", item)
             startActivity(intentPokemon)
+        }
+
+        editTextRecherchePokemon.doAfterTextChanged {
+            var printListPokemon = pokemons?.filter {
+                    pokemon -> pokemon.name.lowercase().contains(editTextRecherchePokemon.text.toString().lowercase())
+            }?.toCollection(ArrayList())
+            listViewPokemons.adapter = PokemonAdapter(
+                requireContext(),
+                R.layout.item_pokemon,
+                printListPokemon!!
+            )
         }
     }
 

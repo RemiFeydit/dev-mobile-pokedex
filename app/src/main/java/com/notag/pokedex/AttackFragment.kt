@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ListView
 import android.widget.TextView
+import androidx.core.widget.doAfterTextChanged
 import com.notag.pokedex.models.Abilities
 import com.notag.pokedex.models.Moves
 
@@ -43,6 +45,7 @@ class AttackFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val listViewMoves = view.findViewById(R.id.ListViewMoves) as ListView
+        val editTextRechercheMoves = view.findViewById(R.id.EditTextRechercheMoves) as EditText
 
         listViewMoves.adapter = MoveAdapter(
             requireContext(),
@@ -60,8 +63,17 @@ class AttackFragment : Fragment() {
             intentMove.putExtra("move", item)
 
             startActivity(intentMove)
+        }
 
-
+        editTextRechercheMoves.doAfterTextChanged {
+            var printListMove = moves?.filter {
+                    ability -> ability.name.lowercase().contains(editTextRechercheMoves.text.toString().lowercase())
+            }?.toCollection(ArrayList())
+            listViewMoves.adapter = MoveAdapter(
+                requireContext(),
+                R.layout.item_moves,
+                printListMove!!
+            )
         }
 
     }
