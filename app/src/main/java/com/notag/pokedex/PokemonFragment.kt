@@ -7,6 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.load.engine.executor.GlideExecutor.UncaughtThrowableStrategy.LOG
 import com.notag.pokedex.models.Pokemon
 
 // TODO: Rename parameter arguments, choose names that match
@@ -29,35 +33,25 @@ class PokemonFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_pokemon, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
         val listViewPokemons = view.findViewById(R.id.ListViewPokemons) as ListView
-
         listViewPokemons.adapter = PokemonAdapter(
             requireContext(),
             R.layout.item_pokemon,
             pokemons!!
         )
-
         listViewPokemons.setOnItemClickListener { parent, view, position, id ->
             val item = pokemons!!.get(position)
-
-
             val intentPokemon = Intent(context, DetailPokemonActivity::class.java)
-
             intentPokemon.putExtra("pokemon", item)
-
             startActivity(intentPokemon)
-
-
         }
     }
 
