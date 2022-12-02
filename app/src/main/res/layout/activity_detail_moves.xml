@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".DetailMovesActivity">
+    tools:context=".ui.detailMoves.DetailMovesActivity">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

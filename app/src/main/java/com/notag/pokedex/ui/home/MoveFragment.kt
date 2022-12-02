@@ -1,4 +1,4 @@
-package com.notag.pokedex
+package com.notag.pokedex.ui.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,9 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ListView
-import android.widget.TextView
 import androidx.core.widget.doAfterTextChanged
-import com.notag.pokedex.models.Abilities
+import com.notag.pokedex.ui.detailMoves.DetailMovesActivity
+import com.notag.pokedex.R
 import com.notag.pokedex.models.Moves
 
 // TODO: Rename parameter arguments, choose names that match
@@ -22,7 +22,7 @@ private const val ARG_NAME = "param1"
  * Use the [AttackFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class AttackFragment : Fragment() {
+class MoveFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var moves: ArrayList<Moves>? = null
 
@@ -38,7 +38,7 @@ class AttackFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_attack, container, false)
+        return inflater.inflate(R.layout.fragment_move, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -90,7 +90,7 @@ class AttackFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(moves: ArrayList<Moves>) =
-            AttackFragment().apply {
+            MoveFragment().apply {
                 arguments = Bundle().apply {
                     putParcelableArrayList(ARG_NAME, moves)
                 }

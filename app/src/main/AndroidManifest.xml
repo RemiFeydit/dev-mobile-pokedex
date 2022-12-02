@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Pokedex"
         tools:targetApi="31">
         <activity
-            android:name=".DetailMovesActivity"
+            android:name=".ui.detailMoves.DetailMovesActivity"
             android:exported="false"
             android:label="DetailMovesActivity"
             android:theme="@style/Theme.Pokedex.NoActionBar">
@@ -25,7 +25,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".DetailAbilitiesActivity"
+            android:name=".ui.detailAbilities.DetailAbilitiesActivity"
             android:exported="false"
             android:label="@string/title_activity_detail_abilities"
             android:theme="@style/Theme.Pokedex.NoActionBar">
@@ -34,7 +34,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".DetailPokemonActivity"
+            android:name=".ui.detailPokemon.DetailPokemonActivity"
             android:exported="false"
             android:label="@string/title_activity_detail_pokemon"
             android:theme="@style/Theme.Pokedex.NoActionBar">
@@ -43,14 +43,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".HomeActivity"
+            android:name=".ui.home.HomeActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

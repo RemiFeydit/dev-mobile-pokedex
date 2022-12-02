@@ -1,4 +1,4 @@
-package com.notag.pokedex
+package com.notag.pokedex.ui.home
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,11 +7,9 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
+import com.notag.pokedex.R
 import com.notag.pokedex.models.Pokemon
 import com.squareup.picasso.Picasso
-import org.w3c.dom.Text
 
 class PokemonAdapter(context: Context, private val resource: Int, objects: ArrayList<Pokemon>)
     : ArrayAdapter<Pokemon>(context, resource, objects) {

@@ -1,9 +1,9 @@
-package com.notag.pokedex
+package com.notag.pokedex.ui.detailMoves
 
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.notag.pokedex.models.Abilities
+import com.notag.pokedex.R
 import com.notag.pokedex.models.Moves
 
 class DetailMovesActivity : AppCompatActivity() {

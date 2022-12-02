@@ -1,14 +1,13 @@
-package com.notag.pokedex
+package com.notag.pokedex.ui.home
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.ImageView
 import android.widget.TextView
+import com.notag.pokedex.R
 import com.notag.pokedex.models.Abilities
-import com.notag.pokedex.models.Pokemon
 
 class AbilityAdapter(context: Context, private val resource: Int, objects: ArrayList<Abilities>)
     : ArrayAdapter<Abilities>(context, resource, objects) {

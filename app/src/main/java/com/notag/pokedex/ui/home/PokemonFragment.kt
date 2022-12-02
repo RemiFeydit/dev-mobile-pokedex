@@ -1,7 +1,6 @@
-package com.notag.pokedex
+package com.notag.pokedex.ui.home
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,11 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ListView
-import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.load.engine.executor.GlideExecutor.UncaughtThrowableStrategy.LOG
+import com.notag.pokedex.ui.detailPokemon.DetailPokemonActivity
+import com.notag.pokedex.R
 import com.notag.pokedex.models.Pokemon
 
 // TODO: Rename parameter arguments, choose names that match

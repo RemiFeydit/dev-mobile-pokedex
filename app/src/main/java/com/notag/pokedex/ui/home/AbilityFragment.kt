@@ -1,4 +1,4 @@
-package com.notag.pokedex
+package com.notag.pokedex.ui.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ListView
-import android.widget.TextView
 import androidx.core.widget.doAfterTextChanged
+import com.notag.pokedex.ui.detailAbilities.DetailAbilitiesActivity
+import com.notag.pokedex.R
 import com.notag.pokedex.models.Abilities
 
 // TODO: Rename parameter arguments, choose names that match
@@ -22,7 +23,7 @@ private const val ARG_CONTENT = "param2"
  * Use the [TalentFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class TalentFragment : Fragment() {
+class AbilityFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var abilities: ArrayList<Abilities>? = null
 
@@ -38,7 +39,7 @@ class TalentFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_talent, container, false)
+        return inflater.inflate(R.layout.fragment_ability, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -89,7 +90,7 @@ class TalentFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(abilities: ArrayList<Abilities>) =
-            TalentFragment().apply {
+            AbilityFragment().apply {
                 arguments = Bundle().apply {
                     putParcelableArrayList(ARG_ABILITY, abilities)
                 }

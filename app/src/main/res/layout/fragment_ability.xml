@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".TalentFragment"
+    tools:context=".ui.home.AbilityFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <EditText

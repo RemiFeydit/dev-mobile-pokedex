@@ -1,25 +1,17 @@
-package com.notag.pokedex
+package com.notag.pokedex.ui.home
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doOnTextChanged
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
+import com.notag.pokedex.R
 import com.notag.pokedex.models.Abilities
 import com.notag.pokedex.models.Moves
 import com.notag.pokedex.models.Pokemon
-import kotlinx.coroutines.delay
 import java.util.*
-import kotlin.concurrent.schedule
 
 interface MyInterface {
     fun onCallback(response: Boolean)
@@ -165,14 +157,14 @@ class HomeActivity : AppCompatActivity(), MyInterface {
     private fun loadFragmentTalent() {
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container, TalentFragment.newInstance(listAbility))
+            .replace(R.id.container, AbilityFragment.newInstance(listAbility))
             .commit()
     }
 
     private fun loadFragmentAttack() {
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container, AttackFragment.newInstance(listMove))
+            .replace(R.id.container, MoveFragment.newInstance(listMove))
             .commit()
     }
 

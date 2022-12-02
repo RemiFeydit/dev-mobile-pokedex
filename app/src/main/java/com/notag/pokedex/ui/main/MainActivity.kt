@@ -1,8 +1,10 @@
-package com.notag.pokedex
+package com.notag.pokedex.ui.main
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.notag.pokedex.R
+import com.notag.pokedex.ui.home.HomeActivity
 import java.util.*
 import kotlin.concurrent.schedule
 

@@ -1,14 +1,14 @@
-package com.notag.pokedex
+package com.notag.pokedex.ui.detailPokemon
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
+import com.notag.pokedex.R
 import com.notag.pokedex.models.Pokemon
 import com.notag.pokedex.models.Stat
 import com.squareup.picasso.Picasso
