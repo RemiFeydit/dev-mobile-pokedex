@@ -14,27 +14,17 @@ class AbilityAdapter(context: Context, private val resource: Int, objects: Array
     : ArrayAdapter<Abilities>(context, resource, objects) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-
         var myConvertView = convertView
         var myViewHolder: ViewHolder
-
         //if (myConvertView == null) {
         myConvertView = LayoutInflater.from(context).inflate(resource, null)
-
         myViewHolder = ViewHolder()
-
-
         myViewHolder.itemAbilityName = myConvertView!!.findViewById(R.id.itemAbilityName)
-
         val item = getItem(position)
 
-        /* Picasso.get()
-            .load(item?.image)
-            .resize(500, 500)
-            .into(myViewHolder.itemPokemonImage)
-
-         */
-        myViewHolder.itemAbilityName?.setText(item!!.name)
+        val abilityName = item!!.name
+        myViewHolder.itemAbilityName?.text =
+            abilityName.substring(0, 1)?.uppercase() + abilityName.substring(1)?.lowercase()
 
 
         return myConvertView
