@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context=".DetailAbilitiesActivity">
 
     <!-- TODO: Update blank fragment layout -->
@@ -11,6 +12,7 @@
         android:id="@+id/textViewAbilityName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/NameTextStyle"
         android:text="@string/hello_blank_fragment" />
 
     <TextView
