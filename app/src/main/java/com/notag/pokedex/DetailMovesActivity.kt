@@ -17,7 +17,7 @@ class DetailMovesActivity : AppCompatActivity() {
 
         val move = intent.getParcelableExtra<Moves>("move")
 
-        textViewMoveName.text = move?.name
+        textViewMoveName.text = move?.name?.substring(0, 1)?.uppercase() + move?.name?.substring(1)?.lowercase()?.replace("-", " ");
         textViewMoveContent.text = move?.flavor_text_entries?.get(0)?.flavor_text
     }
 }

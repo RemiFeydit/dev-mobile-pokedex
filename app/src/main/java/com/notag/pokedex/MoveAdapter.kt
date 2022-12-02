@@ -35,7 +35,7 @@ class MoveAdapter(context: Context, private val resource: Int, objects: ArrayLis
          */
         val moveName = item!!.name
         myViewHolder.itemMoveName?.text =
-            moveName.substring(0, 1)?.uppercase() + moveName.substring(1)?.lowercase()
+            moveName.substring(0, 1)?.uppercase() + moveName.substring(1)?.lowercase()?.replace("-", " ")
 
 
         return myConvertView

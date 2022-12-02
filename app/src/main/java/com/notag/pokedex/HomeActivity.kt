@@ -80,7 +80,7 @@ class HomeActivity : AppCompatActivity(), MyInterface {
                     // Log.i("JSON", response)
                     var abilities = Gson().fromJson(response.toString(), Abilities::class.java)
                     println(abilities)
-                    val frContent = abilities?.flavor_text_entries?.filter { flavor -> flavor.language.name == "fr" }
+                    val frContent = abilities?.flavor_text_entries?.filter { flavor -> flavor.language.name == "en" }
 
                     abilities?.flavor_text_entries = mutableListOf<Abilities.FlavorTextEntry>(frContent!![0])
                     listAbility.add(abilities)
@@ -103,7 +103,7 @@ class HomeActivity : AppCompatActivity(), MyInterface {
                     // Log.i("JSON", response)
                     var moves = Gson().fromJson(response.toString(), Moves::class.java)
                     println(moves)
-                    val frContent = moves?.flavor_text_entries?.filter { flavor -> flavor.language.name == "fr" }
+                    val frContent = moves?.flavor_text_entries?.filter { flavor -> flavor.language.name == "en" }
 
                     moves?.flavor_text_entries = mutableListOf<Moves.FlavorTextEntry>(frContent!![0])
                     listMove.add(moves)

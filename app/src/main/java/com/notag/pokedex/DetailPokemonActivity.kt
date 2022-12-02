@@ -1,7 +1,10 @@
 package com.notag.pokedex
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +23,7 @@ class DetailPokemonActivity : AppCompatActivity() {
     private val textViewPokemonSpeAtk: TextView by lazy { findViewById<TextView>(R.id.textViewPokemonSpeAtk) }
     private val textViewPokemonSpeDef: TextView by lazy { findViewById<TextView>(R.id.textViewPokemonSpeDef) }
     private val textViewPokemonSpeed: TextView by lazy { findViewById<TextView>(R.id.textViewPokemonSpeed) }
+    private val buttonSite: Button by lazy { findViewById<Button>(R.id.buttonSite) }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,5 +66,10 @@ class DetailPokemonActivity : AppCompatActivity() {
             .get()
             .load(pokemon?.sprites?.other?.home?.front_default)
             .into(imageViewPokemonImage);
+
+        buttonSite.setOnClickListener {
+            val intentSite = Intent(Intent.ACTION_VIEW, Uri.parse(String.format("https://www.pokemon.com/us/pokedex/%s", pokemon?.name?.lowercase())))
+            startActivity(Intent.createChooser(intentSite, "Navigateur web"))
+        }
     }
 }

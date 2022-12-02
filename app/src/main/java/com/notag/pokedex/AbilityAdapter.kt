@@ -24,7 +24,7 @@ class AbilityAdapter(context: Context, private val resource: Int, objects: Array
 
         val abilityName = item!!.name
         myViewHolder.itemAbilityName?.text =
-            abilityName.substring(0, 1)?.uppercase() + abilityName.substring(1)?.lowercase()
+            abilityName.substring(0, 1)?.uppercase() + abilityName.substring(1)?.lowercase()?.replace("-", " ")
 
 
         return myConvertView

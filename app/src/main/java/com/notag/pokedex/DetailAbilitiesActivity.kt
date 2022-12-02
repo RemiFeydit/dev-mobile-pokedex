@@ -18,7 +18,7 @@ class DetailAbilitiesActivity : AppCompatActivity() {
 
         println(ability)
 
-        textViewAbilityName.text = ability?.name
+        textViewAbilityName.text = ability?.name?.substring(0, 1)?.uppercase() + ability?.name?.substring(1)?.lowercase()?.replace("-", " ");
         textViewAbilityContent.text = ability?.flavor_text_entries?.get(0)?.flavor_text
     }
 }
