@@ -66,6 +66,7 @@ class AbilityFragment : Fragment() {
             startActivity(intentAbility)
         }
 
+        // Recherche
         editTextRechercheAbilities.doAfterTextChanged {
             var printListAbility = abilities?.filter {
                     ability -> ability.name.lowercase().contains(editTextRechercheAbilities.text.toString().lowercase())

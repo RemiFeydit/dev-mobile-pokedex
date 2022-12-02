@@ -65,6 +65,7 @@ class MoveFragment : Fragment() {
             startActivity(intentMove)
         }
 
+        // Recherche
         editTextRechercheMoves.doAfterTextChanged {
             var printListMove = moves?.filter {
                     ability -> ability.name.lowercase().contains(editTextRechercheMoves.text.toString().lowercase())

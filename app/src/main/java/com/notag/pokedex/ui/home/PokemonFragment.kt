@@ -56,6 +56,7 @@ class PokemonFragment : Fragment() {
             startActivity(intentPokemon)
         }
 
+        // Recherche
         editTextRecherchePokemon.doAfterTextChanged {
             var printListPokemon = pokemons?.filter {
                     pokemon -> pokemon.name.lowercase().contains(editTextRecherchePokemon.text.toString().lowercase())

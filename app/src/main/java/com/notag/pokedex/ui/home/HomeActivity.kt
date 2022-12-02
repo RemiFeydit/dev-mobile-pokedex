@@ -37,6 +37,8 @@ class HomeActivity : AppCompatActivity(), MyInterface {
 
         val queue = Volley.newRequestQueue(this@HomeActivity)
 
+
+        // Récupère les pokémons depuis l'API
         for (i in 1..151) {
             val url = String.format("https://pokeapi.co/api/v2/pokemon/%d", i)
 
@@ -61,6 +63,7 @@ class HomeActivity : AppCompatActivity(), MyInterface {
             queue.add(stringRequest)
         }
 
+        // Récupère les talents depuis l'API
         for (i in 1..268) {
 
             var url = String.format("https://pokeapi.co/api/v2/ability/%d", i)
@@ -84,6 +87,7 @@ class HomeActivity : AppCompatActivity(), MyInterface {
             queue.add(stringRequest)
         }
 
+        // Récupère les attaques depuis l'API
         for (i in 1..826) {
 
             var url = String.format("https://pokeapi.co/api/v2/move/%d", i)
@@ -109,6 +113,7 @@ class HomeActivity : AppCompatActivity(), MyInterface {
 
 
 
+        // Vérifie si un bouton de notre menu est cliqué et affiche le fragment correspondant
         bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId)
             {
@@ -117,35 +122,19 @@ class HomeActivity : AppCompatActivity(), MyInterface {
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.talent_page -> {
-                    loadFragmentTalent()
+                    loadFragmentAbility()
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.attack_page -> {
-                    loadFragmentAttack()
+                    loadFragmentMove()
                     return@setOnNavigationItemSelectedListener true
                 }
                 else -> false
             }
         }
-
-        /* EditTextRecherche.doAfterTextChanged {
-            listPokemon = listPokemon.sortedWith(compareBy<Pokemon> { it.order }).toCollection(ArrayList())
-            var printListPokemon = listPokemon.filter {
-                pokemon -> pokemon.name.contains(EditTextRecherche.text)
-            }.toCollection(ArrayList())
-
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.container, PokemonFragment.newInstance(printListPokemon))
-                .commit()
-        }
-
-         */
-
-
-
     }
 
+    // Fonction de chargement du fragment qui affiche la liste des pokemons
     private fun loadFragmentPokemon() {
         listPokemon = listPokemon.sortedWith(compareBy<Pokemon> { it.order }).toCollection(ArrayList())
         supportFragmentManager
@@ -154,14 +143,16 @@ class HomeActivity : AppCompatActivity(), MyInterface {
             .commit()
     }
 
-    private fun loadFragmentTalent() {
+    // Fonction de chargement du fragment qui affiche la liste des Talents
+    private fun loadFragmentAbility() {
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.container, AbilityFragment.newInstance(listAbility))
             .commit()
     }
 
-    private fun loadFragmentAttack() {
+    // Fonction de chargement du fragment qui affiche la liste des Attaques
+    private fun loadFragmentMove() {
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.container, MoveFragment.newInstance(listMove))

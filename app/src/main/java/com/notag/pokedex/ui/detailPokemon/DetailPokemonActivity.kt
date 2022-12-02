@@ -46,6 +46,7 @@ class DetailPokemonActivity : AppCompatActivity() {
         textViewPokemonSpeDef.text = "Spe Def : ${newStat[4].base_stat}"
         textViewPokemonSpeed.text = "Speed : ${newStat[5].base_stat}"
         imageViewPokemonImage.setOnClickListener {
+            // Vérifie si le pokémon affiché est shiny ou non
             if (!isShiny) {
                 isShiny = true
                 Picasso
@@ -67,6 +68,7 @@ class DetailPokemonActivity : AppCompatActivity() {
             .load(pokemon?.sprites?.other?.home?.front_default)
             .into(imageViewPokemonImage);
 
+        // Ouvre un navigateur internet, vers la page du pokémon
         buttonSite.setOnClickListener {
             val intentSite = Intent(Intent.ACTION_VIEW, Uri.parse(String.format("https://www.pokemon.com/us/pokedex/%s", pokemon?.name?.lowercase())))
             startActivity(Intent.createChooser(intentSite, "Navigateur web"))
