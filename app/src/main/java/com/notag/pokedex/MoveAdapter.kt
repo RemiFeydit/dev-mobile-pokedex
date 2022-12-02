@@ -33,7 +33,9 @@ class MoveAdapter(context: Context, private val resource: Int, objects: ArrayLis
             .into(myViewHolder.itemPokemonImage)
 
          */
-        myViewHolder.itemMoveName?.setText(item!!.name)
+        val moveName = item!!.name
+        myViewHolder.itemMoveName?.text =
+            moveName.substring(0, 1)?.uppercase() + moveName.substring(1)?.lowercase()
 
 
         return myConvertView
